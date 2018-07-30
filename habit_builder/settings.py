@@ -131,3 +131,6 @@ STATICFILES_FINDERS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+LOGIN_URL = '/signin/'
+LOGIN_REDIRECT_URL = 'dashboard'
