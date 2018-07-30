@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -69,8 +70,12 @@ class SignInView(TemplateView):
             )
             if auth_user.is_active:
                 login(request, auth_user)
+                messages.success(request, 'Successfully logged in as {0}'.format(auth_user))
                 return redirect('dashboard')
             else:
+                messages.error(request,
+                               'Wrong username or password'.format(
+                                    auth_user))
                 return redirect('signin')
         else:
             print(form.errors)

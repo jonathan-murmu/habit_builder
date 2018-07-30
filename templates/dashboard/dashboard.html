@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+    {% if messages %}
+        <div class="row">
+            <div class="col-sm">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible"
+                         role="alert">
+                        <button type="button" class="close"
+                                data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
     <div class="row text-center">
         <h1 class="text-center">Successfully signed in as {{ user }}</h1>
     </div>
