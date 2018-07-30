@@ -1,0 +1,6 @@
+#btn_add_habit {
+    bottom: 40px;
+    right: 40px;
+    z-index: 10001;
+    position: fixed;
+}
