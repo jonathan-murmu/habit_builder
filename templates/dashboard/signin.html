@@ -1,36 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if messages %}
-        <div class="row">
-            <div class="col-sm">
-                {% for message in messages %}
-                    <div class="alert {{ message.tags }} alert-dismissible"
-                         role="alert">
-                        <button type="button" class="close"
-                                data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{ message }}
+    <div class="row mt-5">
+        <div class="col-sm-6 offset-sm-3 align-items-center">
+            {% if messages %}
+                <div class="row">
+                    <div class="col-sm">
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }} alert-dismissible"
+                                 role="alert">
+                                <button type="button" class="close"
+                                        data-dismiss="alert"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <h2>Sign In</h2>
+            <form method="post" action=".">{% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        <label>{{ field.label_tag }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
                     </div>
                 {% endfor %}
-            </div>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
         </div>
-    {% endif %}
-    <h2>Sign in</h2>
-    <form method="post" action=".">{% csrf_token %}
-        {% for field in form %}
-            <div class="form-group">
-                <label>{{ field.label_tag }}</label>
-                {{ field }}
-                {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text|safe }}</small>
-                {% endif %}
-                {% for error in field.errors %}
-                    <p style="color: red">{{ error }}</p>
-                {% endfor %}
-            </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary">Sign in</button>
-    </form>
+    </div>
 {% endblock %}

@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
-# Create your views here.
+
+class HabitView(TemplateView):
+    template_name = 'habit/list_habit.html'

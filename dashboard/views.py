@@ -1,9 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
+
+from dashboard.forms import SignUpForm, SignInForm
 
 
 class HomeView(TemplateView):
@@ -27,7 +28,7 @@ class SignUpView(TemplateView):
     template_name = "dashboard/signup.html"
 
     def get(self, request, *args, **kwargs):
-        form = UserCreationForm()
+        form = SignUpForm()
         return render(
             request, self.template_name,
             self.get_context_data(
@@ -37,7 +38,7 @@ class SignUpView(TemplateView):
         )
 
     def post(self, request, *args, **kwargs):
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -51,7 +52,7 @@ class SignInView(TemplateView):
     template_name = 'dashboard/signin.html'
 
     def get(self, request, *args, **kwargs):
-        form = AuthenticationForm()
+        form = SignInForm()
         return render(
             request, self.template_name,
             self.get_context_data(
@@ -61,7 +62,7 @@ class SignInView(TemplateView):
         )
 
     def post(self, request, *args, **kwargs):
-        form = AuthenticationForm(data=request.POST)
+        form = SignInForm(data=request.POST)
 
         if form.is_valid():
             data = form.cleaned_data

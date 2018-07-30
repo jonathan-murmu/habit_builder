@@ -6,7 +6,16 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#">Habit Builder</a>
+        <a class="navbar-brand"
+           href={% if user.is_active %} {% url 'dashboard' %} {% else %} {% url 'dashboard' %} {% endif %}>Habit
+            Builder</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            {% if user.is_active %}
+                <li class="nav-item {% if active_link == 'habit' %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'habit' %}">Habit</a>
+                </li>
+            {% endif %}
+        </ul>
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             {% if user.is_active %}
                 <li class="nav-item dropdown">
@@ -30,6 +39,5 @@
                 </li>
             {% endif %}
         </ul>
-        {
     </div>
 </nav>
