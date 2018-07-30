@@ -1,4 +1,5 @@
 Django==2.0.7
 psycopg2==2.7.5
+python-dotenv==0.8.2
 pytz==2018.5
 whitenoise==3.3.1
