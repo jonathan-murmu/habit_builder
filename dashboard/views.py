@@ -11,6 +11,7 @@ class HomeView(TemplateView):
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard/dashboard.html'
+
     def get(self, request, *args, **kwargs):
         return render(
             request, self.template_name,
@@ -58,10 +59,9 @@ class SignInView(TemplateView):
             )
         )
 
-    def post(self, request, *args,**kwargs):
-        print(request.POST)
+    def post(self, request, *args, **kwargs):
         form = AuthenticationForm(data=request.POST)
-        print(form)
+
         if form.is_valid():
             data = form.cleaned_data
             auth_user = authenticate(
@@ -74,4 +74,5 @@ class SignInView(TemplateView):
                 return redirect('signin')
         else:
             print(form.errors)
+
         return redirect('signin')
