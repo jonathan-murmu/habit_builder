@@ -1,41 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css-required %}
-    <link rel="stylesheet" href="{% static 'css/habit.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/habit.css' %}">
 {% endblock %}
 {% block content %}
-
-    <button type="button" class="btn btn-primary bmd-btn-fab" data-toggle="modal"
-            data-target="#add_new_habit" title="Add Habit" id="btn_add_habit">
-        <i class="material-icons">note_add</i>
+    <button type="button" class="btn btn-primary bmd-btn-fab"
+            data-toggle="modal"
+            data-target="#add_new_habit" title="Add Habit" id="btn_add_habit"
+            onclick="add_habit_form()">
+    <i class="material-icons">note_add</i>
     </button>
     <h1>List all the habit</h1>
 
     <!-- Modal -->
     <div class="modal fade" id="add_new_habit" tabindex="-1" role="dialog"
          aria-labelledby="add_new_habit_title" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="add_new_habit_title">Add Habit</h5>
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Add a new habit</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                            data-dismiss="modal">Close
-                    </button>
-                    <button type="button" class="btn btn-primary">Save
-                        changes
-                    </button>
-                </div>
-            </div>
+        <div class="modal-dialog modal-dialog-centered modal-lg" id="add_new_habit_dialog"
+             role="document">
         </div>
     </div>
-{% endblock %}
 
+{% endblock %}
+{% block js-required %}
+    <script>
+        var ADD_HABIT = "{% url 'add_habit' %}";
+    </script>
+    <script type="text/javascript" src="{% static 'js/habit.js' %} "></script>
+
+{% endblock %}
