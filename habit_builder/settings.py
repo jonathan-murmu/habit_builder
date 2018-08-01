@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'fcm_django',
     'habit.apps.HabitConfig',
     'dashboard.apps.DashboardConfig',
 ]
@@ -139,4 +141,16 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'alert-success',
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
+}
+
+FCM_DJANGO_SETTINGS = {
+        # "FCM_SERVER_KEY": "AIzaSyA-sA3h2sqrtUQZbobEwWIgLvK-40E6WE",
+        "FCM_SERVER_KEY": "AAAAjSpIKFg:APA91bF33LwvR1EVxVeH4Iw3JxYO2rq90nBCbecp9U5-3rfWehkUGYtN8N13bfVneIK3toutuLQV5oY50A6HLopkWFGr1O0hypdge58Z6lZ2AeZUnPuNGIZAd03wuMx-OCrname9cucnUkJomSTapR_8tMYM7y4yHA",
+         # true if you want to have only one active device per registered user at a time
+         # default: False
+        "ONE_DEVICE_PER_USER": False,
+         # devices to which notifications cannot be sent,
+         # are deleted upon receiving error response from FCM
+         # default: False
+        "DELETE_INACTIVE_DEVICES": False,
 }

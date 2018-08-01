@@ -1,3 +1,4 @@
+import datetime
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
@@ -7,7 +8,7 @@ from habit.forms import AddHabitForm
 from habit.models import Habit, Log
 
 
-class HabitView(TemplateView):
+class HabitView(LoginRequiredMixin, TemplateView):
     template_name = 'habit/list_habit.html'
 
     def get(self, request, *args, **kwargs):
@@ -24,17 +25,18 @@ class HabitView(TemplateView):
 class AddHabitView(LoginRequiredMixin, TemplateView):
     template_name = 'habit/add_habit.html'
 
-    def get_context_data(self, **kwargs):
-        """Add extra data in context."""
+    def get(self, request, *args, **kwargs):
+        """Displays the habits."""
         form = AddHabitForm()
 
-        context = super(AddHabitView, self).get_context_data(**kwargs)
-        context.update({
-            'form_header': 'Add New Habit',
-            'form': form
-        })
 
-        return context
+        return render(
+            request, self.template_name,
+            self.get_context_data(
+                form=form,
+                form_header='Add New Habit'
+            )
+        )
 
     def post(self, request, *args, **kwargs):
         form = AddHabitForm(request.POST)

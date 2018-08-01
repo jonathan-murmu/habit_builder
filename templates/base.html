@@ -7,6 +7,8 @@
         <meta name="viewport"
               content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <link rel="manifest" href="{% static 'manifest.json' %}">
+
         <!-- Material Design for Bootstrap fonts and icons -->
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
@@ -25,6 +27,13 @@
         {% block css-required %}
         {% endblock %}
         <title>Habit Builder</title>
+        <script type="text/javascript">
+                if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register("{% url 'firebase-messaging-sw.js' %}");
+                });
+              }
+              </script>
     </head>
     <body>
         {% include "nav_bar.html" %}
@@ -33,6 +42,21 @@
                 <h2> HOME-MARQUEE </h2>
             {% endblock %}
         </div>
+
+        <!-- <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyA-sA3h2sqrtUQ8ZbobEwWIgLvK-40E6WE",
+            authDomain: "habit-9e790.firebaseapp.com",
+            databaseURL: "https://habit-9e790.firebaseio.com",
+            projectId: "habit-9e790",
+            storageBucket: "habit-9e790.appspot.com",
+            messagingSenderId: "606299760728"
+          };
+          firebase.initializeApp(config);
+        </script> -->
+        {% include "firebase_section.html" %}
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
