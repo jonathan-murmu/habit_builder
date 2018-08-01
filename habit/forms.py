@@ -5,7 +5,6 @@ from habit.models import Habit, Week
 
 
 class AddHabitForm(ModelForm):
-    # habit_time = forms.TimeField(widget=forms.TimeInput(format='%H:%M'))
 
     week_day = forms.ModelMultipleChoiceField(
         queryset=Week.objects,
@@ -22,7 +21,6 @@ class AddHabitForm(ModelForm):
         self.fields['habit_type'].widget.attrs.update({'class': 'form-control'})
         self.fields['hourly_interval'].widget.attrs.update({'class': 'form-control'})
         self.fields['habit_time'].widget.attrs.update(
-            {'class': 'form-control datetimepicker-input',
-             'data - target': "#datetimepicker3"}
+            {'class': 'form-control'}
         )
         self.fields['week_day'].widget.attrs.update({'class': 'form-control'})
