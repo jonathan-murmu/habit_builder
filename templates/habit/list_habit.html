@@ -8,14 +8,60 @@
             data-toggle="modal"
             data-target="#add_new_habit" title="Add Habit" id="btn_add_habit"
             onclick="add_habit_form()">
-    <i class="material-icons">note_add</i>
+        <i class="material-icons">note_add</i>
     </button>
-    <h1>List all the habit</h1>
+
+    <h1>List all the habits</h1>
+    {% if messages %}
+        <div class="row">
+            <div class="col-sm">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible"
+                         role="alert">
+                        <button type="button" class="close"
+                                data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    <div class="row">
+        {% for habit in queryset %}
+        <div class="col-sm-4 ">
+            <div class="card mb-1">
+                <div class="card-header">
+                    {{ habit.get_habit_type_display |title }}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ habit.habit | title }}</h5>
+                    <p class="card-text">
+                        {% if habit.habit_type == '1' %}
+                            Scheduled at every {{ habit.hourly_interval }} hours.
+                        {% endif %}
+                        {% if habit.habit_type == '2' %}
+                            Complete this habit at {{ habit.habit_time }} daily.
+                        {% endif %}
+                        {% if habit.habit_type == '3' %}
+                            Complete this habit at {{ habit.habit_time }} every
+                            {% for day in habit.week_day.all %} {{ day | title }} {% endfor %}
+                        {% endif %}
+                    </p>
+                    <a href="{% url 'record_habit_done' habit.pk %}" class="btn btn-primary">Done</a>
+                </div>
+            </div>
+
+    </div>
+    {% endfor %}
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="add_new_habit" tabindex="-1" role="dialog"
          aria-labelledby="add_new_habit_title" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" id="add_new_habit_dialog"
+        <div class="modal-dialog modal-dialog-centered modal-lg"
+             id="add_new_habit_dialog"
              role="document">
         </div>
     </div>

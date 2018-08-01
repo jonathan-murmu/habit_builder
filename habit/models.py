@@ -59,7 +59,7 @@ class Journal(UserTime):
 
 
 class Log(models.Model):
-    completed_at = models.DateTimeField()
+    completed_at = models.DateTimeField(auto_now_add=True)
     habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 

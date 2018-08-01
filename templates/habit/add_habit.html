@@ -99,7 +99,7 @@
             });
         } else if($('#id_habit_type').val() === '3') {
             $('#id_hourly_interval').attr('disabled', true);
-            $('#id_habit_time').attr('disabled', true);
+            $('#id_habit_time').removeAttr('disabled');
             $("input[type=checkbox][id^='id_week_day_']").each(function(){
                 $(this).removeAttr('disabled');
             });
