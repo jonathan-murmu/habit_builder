@@ -1,6 +1,6 @@
-HOURLY = 1
-DAILY = 2
-WEEKLY = 3
+HOURLY = '1'
+DAILY = '2'
+WEEKLY = '3'
 
 # weekday
 MONDAY = '1'

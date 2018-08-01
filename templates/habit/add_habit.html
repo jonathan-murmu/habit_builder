@@ -8,7 +8,7 @@
     </div>
     <div class="modal-body">
         <div class="col-sm-6 offset-sm-3 align-items-center">
-            <form method="post" action=".">{% csrf_token %}
+            <form id="add_habit_form" method="post" action="{% url 'add_habit' %}">{% csrf_token %}
                 <div class="form-group">
                     <label for="{{ form.habit.id_for_label }}"
                            class="bmd-label-floating">Habit</label>
@@ -56,10 +56,10 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary"
+        <button type="button" class="btn btn-secondary"
                 data-dismiss="modal">Close
         </button>
-        <button type="button" class="btn btn-primary">Save
+        <button type="button" onclick="submit_form()" class="btn btn-primary">Save
             changes
         </button>
     </div>
@@ -79,6 +79,34 @@
             viewMode: 'days',
             format: 'HH:mm'
         }).css({'z-index': '20000 !important'});
+        enable_disabled_fields();
+        $('#id_habit_type').on('change', function() {enable_disabled_fields();});
+
+
     });
+    function enable_disabled_fields() {
+        if ($('#id_habit_type').val() === '1') {
+            $('#id_hourly_interval').removeAttr('disabled');
+            $('#id_habit_time').attr('disabled', true);
+            $("input[type=checkbox][id^='id_week_day_']").each(function(){
+                $(this).attr('disabled', true);
+            });
+        } else if ($('#id_habit_type').val() === '2') {
+            $('#id_hourly_interval').attr('disabled', true);
+            $('#id_habit_time').removeAttr('disabled');
+            $("input[type=checkbox][id^='id_week_day_']").each(function(){
+                $(this).attr('disabled', true);
+            });
+        } else if($('#id_habit_type').val() === '3') {
+            $('#id_hourly_interval').attr('disabled', true);
+            $('#id_habit_time').attr('disabled', true);
+            $("input[type=checkbox][id^='id_week_day_']").each(function(){
+                $(this).removeAttr('disabled');
+            });
+        }
+    }
+    function submit_form() {
+        $('#add_habit_form').submit()
+    }
 
 </script>
