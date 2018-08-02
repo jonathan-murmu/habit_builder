@@ -11,11 +11,16 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+
 from django.contrib.messages import constants as messages
+
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+load_dotenv(dotenv_path=BASE_DIR+'/habit_builder/.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -144,8 +149,7 @@ MESSAGE_TAGS = {
 }
 
 FCM_DJANGO_SETTINGS = {
-        # "FCM_SERVER_KEY": "AIzaSyA-sA3h2sqrtUQZbobEwWIgLvK-40E6WE",
-        "FCM_SERVER_KEY": "AAAAjSpIKFg:APA91bF33LwvR1EVxVeH4Iw3JxYO2rq90nBCbecp9U5-3rfWehkUGYtN8N13bfVneIK3toutuLQV5oY50A6HLopkWFGr1O0hypdge58Z6lZ2AeZUnPuNGIZAd03wuMx-OCrname9cucnUkJomSTapR_8tMYM7y4yHA",
+        "FCM_SERVER_KEY": os.getenv('FCM_KEY'),
          # true if you want to have only one active device per registered user at a time
          # default: False
         "ONE_DEVICE_PER_USER": False,
@@ -153,4 +157,11 @@ FCM_DJANGO_SETTINGS = {
          # are deleted upon receiving error response from FCM
          # default: False
         "DELETE_INACTIVE_DEVICES": False,
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }

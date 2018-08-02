@@ -20,13 +20,12 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 
-from fcm_django.api.rest_framework import FCMDeviceAuthorizedViewSet
+from fcm_django.api.rest_framework import FCMDeviceViewSet, FCMDeviceAuthorizedViewSet
 
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-
-router.register(r'devices', FCMDeviceAuthorizedViewSet)
+router.register(r'devices', FCMDeviceViewSet)
 
 
 urlpatterns = [
