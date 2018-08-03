@@ -20,8 +20,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         rewards = Rewards.objects.filter(user=request.user).values(
             'badge').annotate(Count('badge'))
 
-        # Out[7]: < QuerySet[{'badge': '1', 'badge__count': 2}, {'badge': '2',
-        #                                                        'badge__count': 1}] >
         return render(
             request, self.template_name,
             self.get_context_data(

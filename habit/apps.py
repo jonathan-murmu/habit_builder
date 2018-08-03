@@ -5,4 +5,4 @@ class HabitConfig(AppConfig):
     name = 'habit'
 
     def ready(self):
-        import habit.signals  # noqa
+        import habit.signals
