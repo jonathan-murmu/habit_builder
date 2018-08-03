@@ -80,24 +80,37 @@
             format: 'HH:mm'
         }).css({'z-index': '20000 !important'});
         enable_disabled_fields();
-        $('#id_habit_type').on('change', function() {enable_disabled_fields();});
+        $('#id_habit_type').on('change', function() {
+            enable_disabled_fields();
+        });
 
 
     });
     function enable_disabled_fields() {
-        if ($('#id_habit_type').val() === '1') {
+        if ($('#id_habit_type').val() === '1') {  {# When hourly interval #}
+            {# enable hourly interval field. #}
             $('#id_hourly_interval').removeAttr('disabled');
+            {# clear and disable time field #}
+            $('#id_habit_time').val('');
             $('#id_habit_time').attr('disabled', true);
+            {# clear and disable weekday checkboxes #}
             $("input[type=checkbox][id^='id_week_day_']").each(function(){
+                $(this).attr('checked', false);
                 $(this).attr('disabled', true);
             });
-        } else if ($('#id_habit_type').val() === '2') {
+        } else if ($('#id_habit_type').val() === '2') {  {# When daily #}
+            {# clear and disable hourly interval field #}
+            $('#id_hourly_interval').val('');
             $('#id_hourly_interval').attr('disabled', true);
+            {# enable time field #}
             $('#id_habit_time').removeAttr('disabled');
+            {# clear and disable weekday checkbox #}
             $("input[type=checkbox][id^='id_week_day_']").each(function(){
+                $(this).attr('checked', false);
                 $(this).attr('disabled', true);
             });
         } else if($('#id_habit_type').val() === '3') {
+            $('#id_hourly_interval').val('');
             $('#id_hourly_interval').attr('disabled', true);
             $('#id_habit_time').removeAttr('disabled');
             $("input[type=checkbox][id^='id_week_day_']").each(function(){
