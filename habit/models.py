@@ -47,7 +47,8 @@ class Habit(UserTime):
     habit_time = models.TimeField(
         null=True, blank=True, help_text='Example: Hit the gym at 5 pm.')
     week_day = models.ManyToManyField(
-        Week, help_text='Example: Clean the room every Sunday.')
+        Week, help_text='Example: Clean the room every Sunday.',
+        null=True, blank=True)
     # Streak is counted on daily and weekly basis only. Any hourly
     # update is also recorded as daily streak one.
     daily_streak_count = models.PositiveIntegerField(default=0)
