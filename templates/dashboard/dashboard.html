@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load social_share %}
 {% block content %}
     {% if messages %}
         <div class="row">
@@ -26,13 +27,25 @@
             {% for reward in rewards %}
                 {% if reward.badge == '1' %}
                     <h2>Bronze Badge <span class="badge badge-warning">{{ reward.badge__count }} </span> </h2>
+                    <div id="shareBtn" class="btn btn-success clearfix" onclick="share_to_fb('Bronze Badge', {{ reward.badge__count }})">Share</div>
                 {% elif reward.badge == '2' %}
                     <h2>Silver Badge <span class="badge badge-secondary">{{ reward.badge__count }} </span></h2>
+                    <div id="shareBtn" class="btn btn-success clearfix" onclick="share_to_fb('Silver Badge', {{ reward.badge__count }})">Share</div>
                 {% elif reward.badge == '3' %}
                     <h2>Golden Badge <span class="badge badge-danger">{{ reward.badge__count }} </span></h2>
+                    <div id="shareBtn" class="btn btn-success clearfix" onclick="share_to_fb('Gold Badge', {{ reward.badge__count }})">Share</div>
                 {% endif %}
             {% endfor %}
         {% endif %}
     </div>
-
+<script>
+    function share_to_fb(badge, badge_count) {
+        FB.ui({
+                method: 'share',
+                display: 'popup',
+                quote:'I won ' + badge_count + ' ' + badge,
+                href: 'https://developers.facebook.com/docs/',
+        }, function(response){});
+    }
+</script>
 {% endblock %}

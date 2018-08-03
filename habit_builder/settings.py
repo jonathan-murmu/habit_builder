@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_celery_beat',
+    'django_social_share',
     'rest_framework',
     'fcm_django',
     'habit.apps.HabitConfig',
