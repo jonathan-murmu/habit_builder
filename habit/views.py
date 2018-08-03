@@ -65,5 +65,6 @@ class RecordHabitDone(LoginRequiredMixin, TemplateView):
             return redirect('habit')
         Log.objects.create(habit=habit_obj, user=request.user)
 
+
         messages.success(request, 'Successfully updated Habit')
         return redirect('habit')
