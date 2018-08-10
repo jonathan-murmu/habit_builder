@@ -32,7 +32,8 @@ SECRET_KEY = 'b0vtw29-@sy_)ahktx7j0@k6+o!58e&6evag88!pi)#i#8v^5u'
 DEBUG = True
 
 ALLOWED_HOSTS = ['ec2-13-127-237-253.ap-south-1.compute.amazonaws.com',
-                 'localhost', '35.231.168.218']
+                 'localhost', '35.231.168.218',
+                 'shrouded-lake-95121.herokuapp.com']
 
 
 # Application definition
