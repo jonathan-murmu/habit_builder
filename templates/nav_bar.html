@@ -7,10 +7,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a class="navbar-brand"
-           href={% if user.is_active %} {% url 'dashboard' %} {% else %} {% url 'dashboard' %} {% endif %}>Habit
+           href="{% url 'home' %}">Habit
             Builder</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             {% if user.is_active %}
+                <li class="nav-item {% if active_link == 'dashboard' %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                </li>
                 <li class="nav-item {% if active_link == 'habit' %} active {% endif %}">
                     <a class="nav-link" href="{% url 'habit' %}">Habit</a>
                 </li>

@@ -49,7 +49,7 @@ class Habit(UserTime):
     week_day = models.ManyToManyField(
         Week, help_text='Example: Clean the room every Sunday.',
         null=True, blank=True)
-    # Streak is counted on daily and weekly basis only. Any hourly
+    # Streak is counted on daily basis only. Any hourly
     # update is also recorded as daily streak one.
     daily_streak_count = models.PositiveIntegerField(default=0)
 
@@ -65,7 +65,11 @@ class Log(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
-class Streak(models.Model):
-    habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
+class Rewards(models.Model):
+    BADGES = (
+        (constants.BRONZE_BADGE, 'bronze badge'),
+        (constants.SILVER_BADGE, 'silver badge'),
+        (constants.GOLDEN_BADGE, 'golden badge'),
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    streak_count = models.PositiveIntegerField(default=0)
+    badge = models.CharField(choices=BADGES, max_length=15)

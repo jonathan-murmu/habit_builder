@@ -27,4 +27,4 @@ def debug_task(self):
 
 # # run celery command
 # celery -A habit_builder worker -l info
-# celery - A habit_builder worker - B - l info - -scheduler django_celery_beat.schedulers: DatabaseScheduler
+# celery -A habit_builder worker -B -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler

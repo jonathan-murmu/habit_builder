@@ -31,7 +31,8 @@ SECRET_KEY = 'b0vtw29-@sy_)ahktx7j0@k6+o!58e&6evag88!pi)#i#8v^5u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ec2-13-127-237-253.ap-south-1.compute.amazonaws.com',
+                 'localhost', '35.231.168.218']
 
 
 # Application definition
@@ -139,7 +140,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-LOGIN_URL = '/signin/'
+LOGIN_URL = '/habit-app/signin/'
 LOGIN_REDIRECT_URL = 'dashboard'
 
 MESSAGE_TAGS = {

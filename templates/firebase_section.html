@@ -143,7 +143,9 @@
     if (!isTokenSentToServer()) {
       console.log('Sending token to server...');
 
-      fetch('http://localhost:8000/api/devices/', {
+      var dev_url = 'http://localhost:8000/habit-api/devices/';
+      var prod_url = window.location.protocol + '//' + window.location.hostname + '/habit-app/devices/';
+      fetch(prod_url, {
         method: "POST",
         headers: {
             "X-CSRFToken": getCookie("csrftoken"),

@@ -1,10 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
 from dashboard.forms import SignUpForm, SignInForm
+from habit.models import Rewards
 
 
 class HomeView(TemplateView):
@@ -15,11 +17,15 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard/dashboard.html'
 
     def get(self, request, *args, **kwargs):
+        rewards = Rewards.objects.filter(user=request.user).values(
+            'badge').annotate(Count('badge'))
+
         return render(
             request, self.template_name,
             self.get_context_data(
                 user=request.user,
-                active_link='dashboard'
+                active_link='dashboard',
+                rewards=rewards
             )
         )
 

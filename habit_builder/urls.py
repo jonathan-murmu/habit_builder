@@ -17,10 +17,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
-
-from fcm_django.api.rest_framework import FCMDeviceViewSet, FCMDeviceAuthorizedViewSet
+from fcm_django.api.rest_framework import FCMDeviceViewSet
 
 from rest_framework.routers import DefaultRouter
 
@@ -29,12 +28,13 @@ router.register(r'devices', FCMDeviceViewSet)
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('dashboard.urls')),
-    path('habit/', include('habit.urls')),
+    path('', RedirectView.as_view(url='habit-app/home/')),
+    path('habit-app/admin/', admin.site.urls),
+    path('habit-app/', include('dashboard.urls')),
+    path('habit-app/habit/', include('habit.urls')),
     path('firebase-messaging-sw.js',(TemplateView.as_view(
         template_name="firebase-messaging-sw.js",
         content_type='application/javascript',
     )), name='firebase-messaging-sw.js'),
-    path('api/', include(router.urls)),
+    path('habit-app/api/', include(router.urls)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
